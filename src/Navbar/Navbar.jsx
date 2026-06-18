@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
@@ -7,6 +7,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navRef = useRef(null);
   const atTop = location.pathname === "/" && !scrolled;
 
   useEffect(() => {
@@ -21,8 +22,36 @@ function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  // Handle ESC key to close menu
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener("keydown", handleEsc);
+      return () => document.removeEventListener("keydown", handleEsc);
+    }
+  }, [isOpen]);
+
+  // Handle outside click to close menu
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target) && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen]);
+
   return (
-    <nav className={`custom-navbar ${scrolled ? "scrolled" : ""} ${atTop ? "at-top" : ""}`}>
+    <nav ref={navRef} className={`custom-navbar ${scrolled ? "scrolled" : ""} ${atTop ? "at-top" : ""}`}>
       <div className="container">
         <NavLink className="logo" to="/">
           <span className="logo-text">Dr.saravana academy</span>
@@ -42,6 +71,7 @@ function Navbar() {
         </ul>
 
         <motion.button
+          type="button"
           className={`menu-btn ${isOpen ? "active" : ""}`}
           onClick={() => setIsOpen(!isOpen)}
           whileTap={{ scale: 0.95 }}

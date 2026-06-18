@@ -50,11 +50,17 @@
   }
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
   /* Prevent layout shift from scrollbar appearing/disappearing */
   scrollbar-gutter: stable;
 }
