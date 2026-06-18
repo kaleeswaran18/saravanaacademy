@@ -9,9 +9,11 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 10000;
+  width: 100%;
   height: var(--nav-height);
   min-height: var(--nav-height);
+  max-height: var(--nav-height);
   padding: 0;
   background: rgba(255, 248, 225, 0.92);
   backdrop-filter: blur(20px);
@@ -23,6 +25,8 @@
     border-color 0.4s ease,
     box-shadow 0.4s ease,
     backdrop-filter 0.4s ease;
+  contain: layout style paint;
+  will-change: background, border-color, box-shadow;
 }
 
 /* Transparent glass over hero at page top */
@@ -212,6 +216,7 @@
   right: 0;
   width: min(280px, 85vw);
   height: calc(100vh - var(--nav-height));
+  max-height: calc(100vh - var(--nav-height));
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -221,6 +226,9 @@
   padding: 20px 16px;
   border-left: 1px solid rgba(212, 175, 55, 0.22);
   box-shadow: -8px 0 32px rgba(214, 40, 40, 0.08);
+  z-index: 9999;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .mobile-menu a {

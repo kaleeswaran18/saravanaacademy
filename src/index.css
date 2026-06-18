@@ -52,6 +52,11 @@
 
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Prevent layout shift from scrollbar appearing/disappearing */
+  scrollbar-gutter: stable;
 }
 
 #root {
@@ -61,10 +66,16 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  /* Ensure content appears below fixed navbar */
+  padding-top: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Prevent content from hiding behind fixed navbar when jumping to anchors */
+  scroll-padding-top: var(--nav-height, 64px);
 }
 
 h1,
