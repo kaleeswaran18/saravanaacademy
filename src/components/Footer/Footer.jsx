@@ -18,7 +18,7 @@ function Footer() {
           transition={{ duration: 0.6 }}
         >
           <div className="footer-column">
-            <h3>Surya Trust</h3>
+            <h3>Dr.saravanaacademy</h3>
             <p>
               Empowering communities through
               education, healthcare and social
@@ -47,15 +47,15 @@ function Footer() {
           <div className="footer-column">
             <h4>Contact</h4>
             <ul>
-              <li>Madurai, Tamil Nadu</li>
-              <li>+91 9876543210</li>
-              <li>info@suryatrust.com</li>
+              <li>7-A Maruthupandiar Nagar, 4th Main Road, Narimedu, Madurai - 625002</li>
+              <li>+91 6380319582</li>
+              <li>Drsaravanaacademy@gmail.com</li>
             </ul>
           </div>
         </motion.div>
 
         <div className="footer-bottom">
-          © 2026 <span>Surya Trust</span>. All Rights Reserved.
+          © 2026 <span>Dr.saravanaacademy</span>. All Rights Reserved.
         </div>
       </div>
     </footer>
