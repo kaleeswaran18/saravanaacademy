@@ -1,0 +1,234 @@
+.medical-events {
+  overflow: visible;
+  position: relative;
+}
+
+.medical-events-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 40% 30% at 90% 10%, rgba(214, 40, 40, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 25% at 5% 90%, rgba(255, 193, 7, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.medical-events-container {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.section-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 70%);
+  height: 3px;
+  background: var(--theme-gradient);
+  border-radius: 999px;
+  opacity: 0.35;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  padding-bottom: 4px;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--white);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+}
+
+.event-card:hover {
+  box-shadow: var(--shadow-lift);
+  border-color: rgba(214, 40, 40, 0.18);
+  transform: translateY(-6px);
+}
+
+.event-card.gradient-top-border::before {
+  z-index: 2;
+}
+
+.event-image {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 180px;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.event-card:hover .event-image img {
+  transform: scale(1.05);
+}
+
+.event-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(26, 26, 26, 0.15) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.event-date-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  background: var(--theme-gradient);
+  color: var(--white);
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(214, 40, 40, 0.22);
+  line-height: 1;
+}
+
+.event-type-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary-red);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  box-shadow: var(--shadow-soft);
+}
+
+.event-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 20px;
+  text-align: left;
+  min-height: 0;
+}
+
+.event-type {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+  background: rgba(214, 40, 40, 0.07);
+  color: var(--primary-red);
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.event-body h3 {
+  color: var(--text-dark);
+  font-size: clamp(15px, 1.5vw, 16px);
+  font-weight: 700;
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.event-desc {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 10px;
+  flex: 1;
+}
+
+.event-location {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.event-location-icon {
+  color: var(--primary-red);
+  flex-shrink: 0;
+}
+
+.event-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: auto;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 0 0 12px 0;
+  background: rgba(214, 40, 40, 0.07);
+  color: var(--primary-red);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.event-cta:hover {
+  background: var(--theme-gradient);
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+.event-cta span {
+  transition: transform 0.3s ease;
+}
+
+.event-cta:hover span {
+  transform: translateX(3px);
+}
+
+@media (max-width: 1199px) {
+  .events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .event-image {
+    min-height: 200px;
+  }
+
+  .event-body {
+    padding: 16px 18px 18px;
+  }
+}

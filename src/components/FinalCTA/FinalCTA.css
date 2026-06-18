@@ -1,0 +1,95 @@
+.final-cta {
+  position: relative;
+  background: var(--background);
+  padding: var(--section-pad) 0;
+  overflow: hidden;
+}
+
+.final-cta-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(214, 40, 40, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(255, 193, 7, 0.08) 0%, transparent 70%);
+}
+
+.final-cta-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.final-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.final-shape-1 {
+  width: 260px;
+  height: 260px;
+  background: rgba(249, 115, 22, 0.08);
+  top: 10%;
+  left: 5%;
+}
+
+.final-shape-2 {
+  width: 220px;
+  height: 220px;
+  background: rgba(255, 193, 7, 0.1);
+  bottom: 10%;
+  right: 8%;
+}
+
+.final-cta-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 52px) clamp(24px, 4vw, 40px);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: var(--shadow-lift);
+}
+
+.final-cta-content .section-tag {
+  margin-bottom: 14px;
+}
+
+.final-cta-content h2 {
+  color: var(--text-dark);
+  font-size: clamp(1.55rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+
+.final-cta-content p {
+  color: var(--text-muted);
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.75;
+  margin: 0 0 28px;
+}
+
+.final-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .final-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .final-cta-buttons .primary-btn,
+  .final-cta-buttons .outline-btn {
+    width: 100%;
+    min-width: unset;
+  }
+}

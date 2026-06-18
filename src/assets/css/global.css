@@ -1,0 +1,89 @@
+.primary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 180px;
+  height: 50px;
+  border: none;
+  background: var(--theme-gradient);
+  background-size: 200% auto;
+  color: var(--white);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 28px;
+  border-radius: 0 0 22px 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-position 0.4s ease, box-shadow 0.35s ease, transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(214, 40, 40, 0.2);
+}
+
+.primary-btn:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(249, 115, 22, 0.28), var(--shadow-glow);
+}
+
+.outline-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 180px;
+  height: 50px;
+  background: var(--white);
+  color: var(--primary-red);
+  border: 2px solid rgba(214, 40, 40, 0.22);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 28px;
+  border-radius: 0 0 22px 0;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.outline-btn:hover {
+  background: rgba(214, 40, 40, 0.05);
+  border-color: var(--primary-red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.primary-btn:hover .btn-arrow,
+.outline-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.cta-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple-effect 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .primary-btn,
+  .outline-btn {
+    min-width: unset;
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+  }
+}

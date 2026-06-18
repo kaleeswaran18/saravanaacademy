@@ -1,0 +1,104 @@
+.impact-wall {
+  position: relative;
+}
+
+.impact-wall-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 70%);
+  height: 3px;
+  background: var(--theme-gradient);
+  border-radius: 999px;
+  opacity: 0.45;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.25);
+}
+
+.impact-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.impact-wall-card {
+  position: relative;
+  text-align: center;
+  padding: 32px 22px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+}
+
+.impact-wall-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--theme-gradient);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.impact-wall-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-6px);
+  border-color: rgba(214, 40, 40, 0.15);
+}
+
+.impact-wall-card:hover::before {
+  opacity: 1;
+}
+
+.impact-wall-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  line-height: 1;
+  color: var(--primary-red);
+}
+
+.impact-wall-card h3 {
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 800;
+  background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.impact-wall-card p {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 991px) {
+  .impact-wall-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .impact-wall-card {
+    padding: 26px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-wall-grid {
+    grid-template-columns: 1fr;
+  }
+}

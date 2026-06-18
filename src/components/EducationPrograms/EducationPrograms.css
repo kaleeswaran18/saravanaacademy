@@ -1,0 +1,109 @@
+.section-bg-accent {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 40% 30% at 90% 20%, rgba(255, 193, 7, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.edu-programs-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(28px, 4vw, 44px);
+  align-items: start;
+}
+
+.edu-programs-image {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+
+.edu-programs-image img {
+  width: 100%;
+  height: clamp(260px, 32vw, 380px);
+  object-fit: cover;
+  display: block;
+}
+
+.edu-programs-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.edu-programs-badge strong {
+  display: block;
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.edu-programs-badge span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.edu-programs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.edu-program-card {
+  padding: 22px 20px;
+  background: var(--white);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.edu-program-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+}
+
+.edu-program-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: var(--primary-red);
+}
+
+.edu-program-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px;
+}
+
+.edu-program-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .edu-programs-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .edu-programs-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,168 @@
+
+/* ===========================
+   Contact Banner
+=========================== */
+
+.contact-banner{
+    background:#FFF8E1;
+    padding:calc(var(--nav-height, 64px) + 90px) 0 70px;
+    overflow:hidden;
+    margin-top: 0;
+}
+
+.contact-wrapper{
+    width:min(92%,1320px);
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:60px;
+}
+
+/* ===========================
+   Left
+=========================== */
+
+.contact-left{
+    z-index:2;
+}
+
+.breadcrumb{
+    display:inline-block;
+    color:#6B7280;
+    font-size:15px;
+    margin-bottom:18px;
+}
+
+.breadcrumb a{
+    color:#D62828;
+    text-decoration:none;
+}
+
+.contact-left h1{
+
+    font-size:clamp(2.4rem,5vw,4.6rem);
+    line-height:1.08;
+    font-weight:800;
+    color:#171717;
+    margin-bottom:25px;
+
+}
+
+.contact-left p{
+
+    max-width:560px;
+    color:#6B7280;
+    font-size:18px;
+    line-height:1.9;
+
+}
+
+/* ===========================
+   Right
+=========================== */
+
+.contact-right{
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+
+}
+
+.contact-right img{
+
+    width:100%;
+    max-width:760px;
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width:991px){
+
+.contact-banner{
+
+    padding:calc(var(--nav-height, 64px) + 70px) 0 50px;
+
+}
+
+.contact-wrapper{
+
+    grid-template-columns:1fr;
+    gap:40px;
+
+    text-align:center;
+
+}
+
+.contact-left p{
+
+    margin:auto;
+
+}
+
+.contact-right{
+
+    justify-content:center;
+
+}
+
+.contact-right img{
+
+    width:90%;
+    max-width:520px;
+
+}
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:576px){
+
+.contact-banner{
+
+    padding:calc(var(--nav-height, 64px) + 55px) 0 40px;
+
+}
+
+.contact-wrapper{
+
+    width:94%;
+    gap:25px;
+
+}
+
+.contact-left h1{
+
+    font-size:clamp(2rem,8vw,2.8rem);
+
+}
+
+.contact-left p{
+
+    font-size:16px;
+    line-height:1.8;
+
+}
+
+.contact-right img{
+
+    width:100%;
+    max-width:340px;
+
+}
+
+}
+

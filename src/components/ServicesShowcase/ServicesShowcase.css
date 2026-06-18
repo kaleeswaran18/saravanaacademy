@@ -1,0 +1,133 @@
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 8vw, 80px);
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+.service-row--reverse .service-row-image {
+  order: 2;
+}
+
+.service-row--reverse .service-row-content {
+  order: 1;
+}
+
+.service-row-image {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+
+.service-row-image img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.service-row:hover .service-row-image img {
+  transform: scale(1.04);
+}
+
+.service-row-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--theme-gradient);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-row-content {
+  text-align: left;
+}
+
+.service-row-content h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.service-row-content > p {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0 0 24px;
+}
+
+.service-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.benefit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(214, 40, 40, 0.06);
+  border: 1px solid rgba(214, 40, 40, 0.12);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: default;
+  transition: background 0.3s ease;
+}
+
+.benefit-check {
+  color: var(--primary-red);
+  flex-shrink: 0;
+}
+
+.benefit-chip:hover {
+  background: rgba(249, 115, 22, 0.1);
+}
+
+@media (max-width: 991px) {
+  .service-row,
+  .service-row--reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .service-row--reverse .service-row-image,
+  .service-row--reverse .service-row-content {
+    order: unset;
+  }
+
+  .service-row-image img {
+    height: 300px;
+  }
+
+  .service-row-content {
+    text-align: center;
+  }
+
+  .service-benefits {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .service-row-image img {
+    height: 240px;
+  }
+}

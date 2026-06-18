@@ -1,0 +1,34 @@
+.admin-layout {
+  display: flex;
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 280px;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.admin-content {
+  padding: 30px;
+}
+
+@media (max-width: 991px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+
+  .sidebar a {
+    text-align: center;
+    padding: 15px 5px;
+    font-size: 12px;
+  }
+
+  .admin-main {
+    margin-left: 80px;
+  }
+}

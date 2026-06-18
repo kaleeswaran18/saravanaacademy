@@ -1,0 +1,86 @@
+.google-map-section {
+  background: #FFF8E1;
+  padding: 50px 0 100px;
+}
+
+/* Map Card */
+
+.map-wrapper {
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: #FFFFFF;
+
+  border: 2px solid #D4AF37;
+
+  box-shadow: 0 25px 60px rgba(214,40,40,.10);
+
+  transition: .35s ease;
+
+}
+
+.map-wrapper:hover{
+
+  transform: translateY(-8px);
+
+  border-color: #F97316;
+
+  box-shadow: 0 35px 80px rgba(214,40,40,.18);
+
+}
+
+/* Google Map */
+
+.map-wrapper iframe{
+
+  width:100%;
+
+  height:500px;
+
+  border:0;
+
+}
+
+/* Tablet */
+
+@media(max-width:991px){
+
+.google-map-section{
+
+padding:40px 0 80px;
+
+}
+
+.map-wrapper iframe{
+
+height:420px;
+
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:576px){
+
+.google-map-section{
+
+padding:30px 0 60px;
+
+}
+
+.map-wrapper{
+
+border-radius:20px;
+
+}
+
+.map-wrapper iframe{
+
+height:320px;
+
+}
+
+}
