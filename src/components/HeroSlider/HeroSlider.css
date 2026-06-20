@@ -17,34 +17,41 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 26%;
+  object-position: center center;
   z-index: 0;
   pointer-events: none;
 }
 
+/* ── MEDIA: fills entire hero ── */
 .video-hero-media {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   z-index: 1;
 }
 
+/* ── LAYERS: stacked, Framer Motion controls opacity ── */
 .video-hero-layer {
   position: absolute;
   inset: 0;
-  will-change: opacity;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  will-change: opacity;
 }
 
-.video-hero-layer.is-active .video-hero-video.is-ready,
-.video-hero-layer.is-active .video-hero-poster:not(.is-hidden) {
-  animation: heroKenBurns 8s ease-out forwards;
+/* ── PICTURE tag: must fill layer completely ── */
+.video-hero-layer picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-@keyframes heroKenBurns {
-  from { transform: scale(1); }
-  to { transform: scale(1.035); }
-}
-
+/* ── IMAGE & VIDEO: full cover, no black bars, no gaps ── */
 .video-hero-poster,
 .video-hero-video {
   position: absolute;
@@ -52,7 +59,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 26%;
+  object-position: center center;
   display: block;
 }
 
@@ -70,7 +77,18 @@
   opacity: 1;
 }
 
-/* Overlays */
+/* Ken Burns only on active layer */
+.video-hero-layer.is-active .video-hero-video.is-ready,
+.video-hero-layer.is-active .video-hero-poster:not(.is-hidden) {
+  animation: heroKenBurns 8s ease-out forwards;
+}
+
+@keyframes heroKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.035); }
+}
+
+/* ── Overlays ── */
 .video-hero-overlay-base {
   position: absolute;
   inset: 0;
@@ -109,7 +127,7 @@
   pointer-events: none;
 }
 
-/* Content */
+/* ── Content Inner ── */
 .video-hero-inner {
   position: relative;
   z-index: 3;
@@ -126,63 +144,24 @@
   text-align: left;
 }
 
-/* Badge */
+/* ── Badge — brand logo mark (image) ── */
 .video-hero-badge {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 16px;
-  margin-bottom: 28px;
-  background: rgba(20, 20, 20, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50px;
-  color: #FFFFFF;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  margin-bottom: 30px;
 }
 
-.video-hero-badge-label {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.video-hero-badge picture {
+  display: block;
 }
 
-.video-hero-badge-label {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.2em;
-  white-space: nowrap;
+.video-hero-badge-logo-img {
+  width: clamp(150px, 20vw, 230px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.28));
 }
 
-.video-hero-badge-initial {
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: clamp(1.05rem, 1.2vw, 1.25rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  text-transform: none;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.video-hero-badge-copy {
-  font-family: var(--font-family);
-  font-style: normal;
-  font-weight: 700;
-  font-size: clamp(0.85rem, 1vw, 0.95rem);
-  line-height: 1;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: baseline;
-}
-
-/* Heading */
+/* ── Heading ── */
 .video-hero-content h1 {
   font-size: clamp(2.25rem, 5.5vw, 3.65rem);
   font-weight: 800;
@@ -192,13 +171,8 @@
   margin: 0 0 26px;
 }
 
-.video-hero-line {
-  display: block;
-}
-
-.video-hero-word {
-  display: inline;
-}
+.video-hero-line { display: block; }
+.video-hero-word { display: inline; }
 
 .video-hero-highlight {
   display: inline;
@@ -209,7 +183,7 @@
   background-clip: text;
 }
 
-/* Subtitle */
+/* ── Subtitle ── */
 .video-hero-subtitle {
   font-size: clamp(14px, 1.6vw, 16px);
   line-height: 1.78;
@@ -218,7 +192,7 @@
   max-width: 620px;
 }
 
-/* CTAs */
+/* ── CTA Buttons ── */
 .video-hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -242,7 +216,6 @@
 .video-hero-btn-primary {
   box-shadow: 0 6px 24px rgba(214, 40, 40, 0.3);
 }
-
 .video-hero-btn-primary:hover {
   box-shadow: 0 10px 32px rgba(249, 115, 22, 0.42), 0 0 22px rgba(214, 40, 40, 0.22);
 }
@@ -254,14 +227,13 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
 .video-hero-btn-outline:hover {
   background: rgba(255, 255, 255, 0.12) !important;
   border-color: rgba(255, 255, 255, 0.52) !important;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14);
 }
 
-/* ── Compact Impact Metrics Row ── */
+/* ── Metrics Row ── */
 .video-hero-metrics {
   display: flex;
   align-items: flex-start;
@@ -296,9 +268,7 @@
   background: rgba(255, 255, 255, 0.16);
 }
 
-.hero-metric:hover {
-  opacity: 0.92;
-}
+.hero-metric:hover { opacity: 0.92; }
 
 .hero-metric-value {
   display: block;
@@ -323,12 +293,13 @@
   line-height: 1.35;
 }
 
-/* Tablet & mobile — stacked layout: media first, content below */
+/* ══════════════════════════════════════════
+   TABLET (max-width: 991px)
+══════════════════════════════════════════ */
 @media (max-width: 991px) {
   .video-hero {
     flex-direction: column;
     min-height: auto;
-    margin-top: var(--nav-height, 64px);
     overflow-x: hidden;
     background: linear-gradient(
       180deg,
@@ -340,30 +311,39 @@
     );
   }
 
-  .video-hero-poster-fallback {
-    display: none;
-  }
+  .video-hero-poster-fallback { display: none; }
 
   .video-hero-media {
     position: relative;
     inset: auto;
     width: 100%;
-    flex-shrink: 0;
+    height: auto;
     aspect-ratio: 16 / 9;
     min-height: clamp(200px, 48vw, 360px);
     max-height: min(52vh, 420px);
     overflow: hidden;
-    background: var(--background);
+    flex-shrink: 0;
+    background: #000;
   }
 
   .video-hero-layer {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-hero-layer picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .video-hero-poster,
   .video-hero-video {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center;
   }
 
@@ -374,9 +354,7 @@
 
   .video-hero-overlay-base,
   .video-hero-overlay-gradient,
-  .video-hero-glow {
-    display: none;
-  }
+  .video-hero-glow { display: none; }
 
   .video-hero-inner {
     position: relative;
@@ -388,18 +366,33 @@
     padding-bottom: clamp(40px, 6vw, 56px);
   }
 
+  /* ── Content responsive on tablet ── */
+  .video-hero-content {
+    max-width: 100%;
+  }
+
   .video-hero-content h1 {
     color: var(--text-dark);
+    font-size: clamp(2rem, 5vw, 3rem);
   }
 
   .video-hero-subtitle {
     color: var(--text-muted);
+    max-width: 100%;
   }
 
+  /* ── Badge logo on light tablet background ── */
+  /* Center the badge + increase image size on tablet */
   .video-hero-badge {
-    background: rgba(255, 255, 255, 0.78);
-    border-color: rgba(212, 175, 55, 0.38);
-    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .video-hero-badge-logo-img {
+    width: clamp(160px, 32vw, 230px);
+    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.12));
   }
 
   .video-hero-metrics {
@@ -411,85 +404,118 @@
     border-top-color: rgba(212, 175, 55, 0.28);
   }
 
+  .hero-metric { padding: 0 16px; }
+
   .hero-metric:not(:last-child)::after {
     background: rgba(212, 175, 55, 0.28);
   }
 
-  .hero-metric-label {
-    color: var(--text-muted);
-  }
+  .hero-metric:nth-child(1)::after,
+  .hero-metric:nth-child(3)::after { display: block; }
+  .hero-metric:nth-child(2)::after,
+  .hero-metric:nth-child(4)::after { display: none; }
+
+  .hero-metric-label { color: var(--text-muted); }
 
   .video-hero-btn-outline {
     background: rgba(255, 255, 255, 0.72) !important;
     color: var(--text-dark) !important;
     border-color: rgba(214, 40, 40, 0.32) !important;
   }
-
   .video-hero-btn-outline:hover {
     background: rgba(255, 255, 255, 0.92) !important;
     border-color: rgba(249, 115, 22, 0.45) !important;
   }
+}
 
-  .video-hero-content,
-  .video-hero-subtitle {
-    max-width: 100%;
-  }
-
-  .hero-metric {
-    padding: 0 16px;
-  }
-
-  .hero-metric:nth-child(odd)::after {
-    display: block;
-  }
-
-  .hero-metric:nth-child(even)::after {
-    display: none;
-  }
-
-  .hero-metric:nth-child(1)::after,
-  .hero-metric:nth-child(3)::after {
-    display: block;
-  }
-
-  .hero-metric:nth-child(2)::after,
-  .hero-metric:nth-child(4)::after {
-    display: none;
+/* ══════════════════════════════════════════
+   BADGE — TABLET (max-width: 768px)
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .video-hero-badge-logo-img {
+    width: clamp(140px, 38vw, 200px);
   }
 }
 
-/* Mobile */
+/* ══════════════════════════════════════════
+   MOBILE (max-width: 576px)
+══════════════════════════════════════════ */
 @media (max-width: 576px) {
-  .video-hero {
-    margin-bottom: 24px;
-  }
+  .video-hero { margin-bottom: 24px; }
 
+  /* Media: full width, no crop, auto height */
   .video-hero-media {
-    aspect-ratio: 4 / 3;
-    min-height: clamp(200px, 62vw, 300px);
-    max-height: min(48vh, 360px);
+    aspect-ratio: unset;
+    min-height: unset;
+    max-height: unset;
+    height: auto;
+    width: 100%;
+    background: transparent;
   }
 
+  .video-hero-media .video-hero-layer {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .video-hero-media .video-hero-layer[style*="opacity: 0"],
+  .video-hero-media .video-hero-layer[style*="opacity:0"] {
+    display: none;
+  }
+
+  .video-hero-poster,
+  .video-hero-video {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    display: block !important;
+  }
+
+  /* Inner padding */
   .video-hero-inner {
     padding-top: clamp(20px, 5vw, 28px);
     padding-bottom: 48px;
   }
 
+  /* ── Content responsive on mobile ── */
+  .video-hero-content {
+    max-width: 100%;
+  }
+
   .video-hero-content h1 {
     font-size: clamp(1.85rem, 7.5vw, 2.35rem);
     line-height: 1.16;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
   }
 
   .video-hero-subtitle {
-    margin-bottom: 28px;
+    font-size: 14px;
     line-height: 1.72;
+    margin-bottom: 24px;
   }
 
+  /* Badge — centered, bigger on mobile */
+  .video-hero-badge {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 18px;
+  }
+  .video-hero-badge-logo-img {
+    width: clamp(150px, 50vw, 200px);
+  }
+
+  /* Buttons: stacked full width */
   .video-hero-actions {
     flex-direction: column;
     align-items: stretch;
-    margin-bottom: 28px;
+    gap: 10px;
+    margin-bottom: 24px;
   }
 
   .video-hero-actions .primary-btn,
@@ -497,69 +523,56 @@
     width: 100%;
     justify-content: center;
     height: 46px;
+    font-size: 14px;
   }
 
+  /* Metrics: 2x2 grid */
   .video-hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px 0;
     padding-top: 18px;
+    max-width: 100%;
   }
 
-  .hero-metric {
-    padding: 0 8px;
-  }
+  .hero-metric { padding: 0 8px; }
+  .hero-metric-value { font-size: clamp(1.1rem, 5vw, 1.35rem); }
+  .hero-metric-label { font-size: 8px; }
 
-  .hero-metric-value {
-    font-size: clamp(1.1rem, 5vw, 1.35rem);
-  }
-
-  .hero-metric-label {
-    font-size: 8px;
-  }
+  .hero-metric:nth-child(1)::after,
+  .hero-metric:nth-child(3)::after { display: block; }
+  .hero-metric:nth-child(2)::after,
+  .hero-metric:nth-child(4)::after { display: none; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .video-hero-layer {
-    transition: opacity 0.01ms !important;
+/* ══════════════════════════════════════════
+   SMALL MOBILE (max-width: 380px)
+══════════════════════════════════════════ */
+@media (max-width: 380px) {
+  .video-hero-content h1 {
+    font-size: clamp(1.6rem, 8vw, 1.85rem);
   }
 
+  .video-hero-badge-logo-img {
+    width: clamp(135px, 56vw, 165px);
+  }
+
+  .video-hero-actions .primary-btn,
+  .video-hero-actions .outline-btn {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .hero-metric-value { font-size: 1rem; }
+  .hero-metric-label { font-size: 7.5px; }
+}
+
+/* ══════════════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
   .video-hero-layer.is-active .video-hero-video.is-ready,
   .video-hero-layer.is-active .video-hero-poster:not(.is-hidden) {
     animation: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .video-hero-badge {
-    width: fit-content;
-    max-width: 100%;
-    padding: 10px 16px;
-    gap: 8px;
-    font-size: 12px;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    overflow: visible;
-  }
-
-  .video-hero-badge-label {
-    gap: 0.18em;
-  }
-
-  .video-hero-badge-initial {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-  }
-
-  .video-hero-badge-copy {
-    font-size: clamp(0.85rem, 1.1vw, 0.92rem);
-  }
-}
-
-@media (max-width: 576px) {
-  .video-hero-badge {
-    padding: 10px 14px;
-    gap: 6px;
-  }
-
-  .video-hero-badge-initial {
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
   }
 }
