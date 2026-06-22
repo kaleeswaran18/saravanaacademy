@@ -52,14 +52,17 @@
   filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.35));
 }
 
+/* Inactive links must stay dark/neutral here too — the navbar
+   sits on the page's light background even when "at-top", so
+   white text (the old rule) had almost no contrast against it. */
 .custom-navbar.at-top .desktop-menu a {
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  color: var(--text-dark);
+  text-shadow: none;
 }
 
 .custom-navbar.at-top .desktop-menu a:hover {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-red);
+  background: rgba(214, 40, 40, 0.06);
 }
 
 .custom-navbar.at-top .nav-active {
