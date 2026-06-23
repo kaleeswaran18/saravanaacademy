@@ -4,13 +4,28 @@
   --header-padding: max(clamp(16px, 3vw, 24px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
 }
 
+/* ── FIX: lock scrollbar gutter so hero slide-change (different
+   image/video aspect ratios) never toggles the scrollbar and
+   shifts the fixed navbar left/right ── */
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 .custom-navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  width: 100vw;          /* was 100% — 100vw locks to true viewport, immune to body width shifts */
+  max-width: 100vw;
   z-index: 10000;
-  width: 100%;
   height: var(--nav-height);
   min-height: var(--nav-height);
   max-height: var(--nav-height);
@@ -189,6 +204,7 @@
   padding: 0;
   margin: 0;
   font: inherit;
+  flex-shrink: 0; /* keep button from shrinking/shifting when logo text width changes */
 }
 
 .menu-btn span {

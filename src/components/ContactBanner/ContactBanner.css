@@ -1,4 +1,3 @@
-
 /* ===========================
    Contact Banner
 =========================== */
@@ -40,14 +39,37 @@
     text-decoration:none;
 }
 
-.contact-left h1{
+.contact-heading{
 
-    font-size:clamp(2.4rem,5vw,4.6rem);
-    line-height:1.08;
-    font-weight:800;
-    color:#171717;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+    column-gap:24px;
     margin-bottom:25px;
 
+}
+
+/* ── Column 1: logo image ── */
+.vscare-logo-inline{
+    height:clamp(4.2rem,8vw,7rem);
+    width:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 6px 16px rgba(214,40,40,0.10));
+}
+
+/* ── Column 2: heading text, wraps naturally inside its own column ── */
+.heading-lines{
+    display:block;
+    line-height:1.1;
+    min-width:0;
+}
+
+.heading-lines .gradient-text{
+    display:inline-block;
+    font-size:clamp(1.6rem,2.6vw,2.6rem);
+    font-weight:800;
+    white-space:normal;
+    word-break:break-word;
 }
 
 .contact-left p{
@@ -84,6 +106,35 @@
 }
 
 /* ===========================
+   Laptop (992px–1439px)
+   Fix: previously the heading took 3 tall lines + the photo's
+   intrinsic height pushed the wrapper taller than the viewport,
+   clipping "learning to achieve successful careers." Shrinking
+   the heading above already frees space; this tightens vertical
+   rhythm further so the paragraph is never cut off.
+=========================== */
+
+@media (max-width:1439px) and (min-width:992px){
+
+.contact-banner{
+    padding:calc(var(--nav-height, 64px) + 56px) 0 56px;
+}
+
+.contact-wrapper{
+    gap:40px;
+}
+
+.contact-heading{
+    margin-bottom:18px;
+}
+
+.contact-left p{
+    margin-bottom:0;
+}
+
+}
+
+/* ===========================
    Tablet
 =========================== */
 
@@ -104,6 +155,23 @@
 
 }
 
+.contact-heading{
+
+    grid-template-columns:1fr;
+    justify-content:center;
+    justify-items:center;
+    row-gap:14px;
+
+}
+
+.vscare-logo-inline{
+    height:clamp(6rem,9vw,6.5rem);
+}
+
+.heading-lines{
+    text-align:center;
+}
+
 .contact-left p{
 
     margin:auto;
@@ -118,8 +186,8 @@
 
 .contact-right img{
 
-    width:90%;
-    max-width:520px;
+    width:100%;
+    max-width:820px;
 
 }
 
@@ -144,10 +212,19 @@
 
 }
 
-.contact-left h1{
+.contact-heading{
 
-    font-size:clamp(2rem,8vw,2.8rem);
+    row-gap:10px;
 
+}
+
+.heading-lines .gradient-text{
+    font-size:clamp(1.4rem,5.5vw,1.9rem);
+
+}
+
+.vscare-logo-inline{
+    height:clamp(6rem,12vw,4rem);
 }
 
 .contact-left p{
@@ -160,9 +237,8 @@
 .contact-right img{
 
     width:100%;
-    max-width:340px;
+    max-width:560px;
 
 }
 
 }
-

@@ -1,3 +1,69 @@
+/* ── Hero Split ── */
+.stories-hero {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.stories-hero-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stories-hero-logo {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.stories-hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stories-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-red);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stories-hero-highlight {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  background: var(--theme-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.stories-hero-desc {
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.stories-hero-divider {
+  width: 56px;
+  height: 3px;
+  background: var(--theme-gradient);
+  border-radius: 4px;
+}
+
+/* ── Cards + Featured Layout ── */
 .stories-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -113,7 +179,27 @@
   font-size: 13px;
 }
 
+/* ── Tablet ── */
 @media (max-width: 991px) {
+  .stories-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .stories-hero-logo {
+    max-width: 220px;
+    margin: auto;
+  }
+
+  .stories-hero-right {
+    align-items: center;
+  }
+
+  .stories-hero-label {
+    justify-content: center;
+  }
+
   .stories-layout {
     grid-template-columns: 1fr;
   }
@@ -143,7 +229,20 @@
   }
 }
 
+/* ── Mobile ── */
 @media (max-width: 576px) {
+  .stories-hero {
+    margin-bottom: 32px;
+  }
+
+  .stories-hero-logo {
+    max-width: 180px;
+  }
+
+  .stories-hero-highlight {
+    font-size: 26px;
+  }
+
   .story-featured-content {
     padding: 24px 20px;
   }
