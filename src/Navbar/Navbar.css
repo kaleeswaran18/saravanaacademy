@@ -1,9 +1,3 @@
-:root {
-  --nav-height: 64px;
-  --header-gap: clamp(16px, 2vw, 26px);
-  --header-padding: max(clamp(16px, 3vw, 24px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
-}
-
 /* ── FIX: lock scrollbar gutter so hero slide-change (different
    image/video aspect ratios) never toggles the scrollbar and
    shifts the fixed navbar left/right ── */
@@ -18,12 +12,21 @@ body {
   position: relative;
 }
 
+:root {
+  --nav-height: 72px;                 /* slight premium increase (was 64px) — kept as the single source of truth for any layout offset elsewhere */
+  --nav-height-compact: 64px;         /* shrunk state once the page is scrolled */
+  --nav-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-transition: 360ms var(--nav-ease);
+  --header-gap: clamp(18px, 2.2vw, 30px);
+  --header-padding: max(clamp(16px, 3vw, 24px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+}
+
 .custom-navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  width: 100vw;          /* was 100% — 100vw locks to true viewport, immune to body width shifts */
+  width: 100vw;
   max-width: 100vw;
   z-index: 10000;
   height: var(--nav-height);
@@ -36,6 +39,7 @@ body {
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
   box-shadow: 0 4px 24px rgba(214, 40, 40, 0.06);
   transition:
+    height var(--nav-transition),
     background 0.4s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease,
@@ -45,7 +49,7 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   touch-action: pan-y;
-  will-change: transform, background, border-color, box-shadow;
+  will-change: transform, height, background, border-color, box-shadow;
 }
 
 /* Transparent glass over hero at page top */
@@ -67,9 +71,6 @@ body {
   filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.35));
 }
 
-/* Inactive links must stay dark/neutral here too — the navbar
-   sits on the page's light background even when "at-top", so
-   white text (the old rule) had almost no contrast against it. */
 .custom-navbar.at-top .desktop-menu a {
   color: var(--text-dark);
   text-shadow: none;
@@ -80,10 +81,12 @@ body {
   background: rgba(214, 40, 40, 0.06);
 }
 
-.custom-navbar.at-top .nav-active {
+/* scoped to .desktop-menu only — previously this rule's higher
+   specificity than ".mobile-menu .nav-active" meant an open mobile
+   menu while at-top could get overridden by this block. Scoping it
+   fixes that without changing how it looks on desktop. */
+.custom-navbar.at-top .desktop-menu .nav-active {
   color: var(--white) !important;
-  background: var(--theme-gradient) !important;
-  box-shadow: 0 4px 18px rgba(214, 40, 40, 0.35);
   text-shadow: none;
 }
 
@@ -97,13 +100,16 @@ body {
   background: var(--white);
 }
 
-/* Solid premium bar after scroll */
+/* Solid premium bar after scroll — also where the navbar shrinks */
 .custom-navbar.scrolled {
+  height: var(--nav-height-compact);
+  min-height: var(--nav-height-compact);
+  max-height: var(--nav-height-compact);
   background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
   border-bottom-color: rgba(212, 175, 55, 0.28);
-  box-shadow: 0 6px 28px rgba(214, 40, 40, 0.08);
+  box-shadow: 0 10px 32px rgba(214, 40, 40, 0.1);
 }
 
 .custom-navbar .container {
@@ -121,14 +127,14 @@ body {
 
 .logo {
   text-decoration: none;
-  transition: transform 0.3s ease, background 0.4s ease, border-color 0.4s ease;
+  transition: transform 0.3s ease, background 0.4s ease, border-color 0.4s ease, padding 0.3s var(--nav-ease);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 9px 18px;
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 12px;
+  border-radius: 999px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   min-width: 0;
@@ -137,6 +143,10 @@ body {
 
 .logo:hover {
   transform: translateY(-1px);
+}
+
+.custom-navbar.scrolled .logo {
+  padding: 6px 14px;
 }
 
 .logo-text {
@@ -151,25 +161,54 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: font-size 0.3s var(--nav-ease);
+}
+
+.custom-navbar.scrolled .logo-text {
+  font-size: clamp(0.92rem, 1.05vw, 1.1rem);
 }
 
 .desktop-menu {
   display: flex;
   list-style: none;
-  gap: clamp(10px, 1.2vw, 18px);
+  gap: clamp(16px, 1.8vw, 28px);
   margin: 0;
   align-items: center;
   min-width: 0;
 }
 
 .desktop-menu a {
+  position: relative;
+  isolation: isolate;
   color: var(--text-dark);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  transition: color 0.3s ease, background 0.3s ease;
-  padding: 10px 16px;
-  border-radius: 50px;
+  letter-spacing: 0.01em;
+  transition: color 300ms var(--nav-ease), background 300ms var(--nav-ease);
+  padding: 11px 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* center-grown underline for hover — absolutely positioned so it
+   never affects the link's box size (no layout shift) */
+.desktop-menu a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary-red);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition: transform 280ms var(--nav-ease), opacity 280ms ease;
+  z-index: 1;
 }
 
 .desktop-menu a:hover {
@@ -177,10 +216,33 @@ body {
   background: rgba(214, 40, 40, 0.06);
 }
 
-.nav-active {
+.desktop-menu a:not(.nav-active):hover::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* the sliding active indicator — framer-motion's layoutId animates
+   this smoothly between Home/Contact, sitting behind the label */
+.nav-pill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--theme-gradient);
+  box-shadow: 0 4px 18px rgba(214, 40, 40, 0.28);
+}
+
+.nav-label {
+  position: relative;
+  z-index: 1;
+}
+
+.desktop-menu .nav-active {
   color: var(--white) !important;
-  background: var(--theme-gradient) !important;
-  box-shadow: 0 3px 14px rgba(214, 40, 40, 0.28);
+}
+
+.desktop-menu .nav-active::after {
+  opacity: 0;
 }
 
 .menu-btn {
@@ -198,20 +260,20 @@ body {
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  transition: background 300ms var(--nav-ease), border-color 300ms var(--nav-ease), transform 300ms var(--nav-ease), box-shadow 300ms var(--nav-ease);
   pointer-events: auto;
   z-index: 10001;
   padding: 0;
   margin: 0;
   font: inherit;
-  flex-shrink: 0; /* keep button from shrinking/shifting when logo text width changes */
+  flex-shrink: 0;
 }
 
 .menu-btn span {
   width: clamp(16px, 2vw, 18px);
   height: 2px;
   background: var(--primary-red);
-  transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  transition: background 300ms var(--nav-ease), transform 300ms var(--nav-ease), opacity 300ms var(--nav-ease);
   border-radius: 999px;
 }
 
@@ -250,8 +312,8 @@ body {
   -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 20px 16px;
+  gap: 2px;
+  padding: 18px 14px;
   border-left: 1px solid rgba(212, 175, 55, 0.22);
   box-shadow: -8px 0 32px rgba(214, 40, 40, 0.08);
   z-index: 9998;
@@ -261,14 +323,22 @@ body {
   will-change: transform;
 }
 
+.mobile-menu-item:not(:last-child) {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+}
+
 .mobile-menu a {
+  display: block;
+  width: 100%;
   color: var(--text-dark);
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
-  padding: 12px 14px;
+  padding: 14px 16px;
+  min-height: 44px;
+  box-sizing: border-box;
   border-radius: var(--radius-md);
-  transition: 0.3s;
+  transition: background 250ms var(--nav-ease), color 250ms var(--nav-ease);
 }
 
 .mobile-menu a:hover {
@@ -279,6 +349,30 @@ body {
 .mobile-menu .nav-active {
   background: var(--theme-gradient) !important;
   color: var(--white) !important;
+  box-shadow: 0 4px 14px rgba(214, 40, 40, 0.22);
+}
+
+/* keyboard focus visibility */
+.desktop-menu a:focus-visible,
+.mobile-menu a:focus-visible,
+.menu-btn:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-navbar,
+  .logo,
+  .logo-text,
+  .desktop-menu a,
+  .desktop-menu a::after,
+  .menu-btn,
+  .menu-btn span,
+  .mobile-menu a {
+    transition: none !important;
+  }
 }
 
 @media (max-width: 991px) {

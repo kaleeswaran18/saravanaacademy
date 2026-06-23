@@ -1,109 +1,253 @@
+/* ═══════════════════════════════════════════════════════════════
+   Ambient background accent
+═══════════════════════════════════════════════════════════════ */
+.education-programs {
+  position: relative;
+  overflow: hidden;
+}
+
 .section-bg-accent {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 40% 30% at 90% 20%, rgba(255, 193, 7, 0.05) 0%, transparent 70%);
+  background:
+    radial-gradient(ellipse 50% 35% at 92% 12%, rgba(192, 57, 43, 0.045) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 25% at 8% 80%, rgba(245, 166, 35, 0.04) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 0;
 }
 
+.education-programs .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Two-column layout: image | cards
+═══════════════════════════════════════════════════════════════ */
 .edu-programs-layout {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: clamp(28px, 4vw, 44px);
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(28px, 4vw, 52px);
   align-items: start;
+  margin-top: clamp(32px, 4vw, 48px);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Image panel
+═══════════════════════════════════════════════════════════════ */
 .edu-programs-image {
   position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lift);
 }
 
-.edu-programs-image img {
+.edu-image-frame {
+  border-radius: 20px;
+  overflow: hidden;
+  /* Layered depth shadow */
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 6px 18px rgba(0, 0, 0, 0.09),
+    0 20px 48px rgba(0, 0, 0, 0.08);
+}
+
+.edu-image-frame img {
   width: 100%;
-  height: clamp(260px, 32vw, 380px);
+  height: clamp(260px, 33vw, 400px);
   object-fit: cover;
   display: block;
+  /* Subtle warm shift to stay cohesive with brand */
+  filter: saturate(1.05);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.edu-programs-image:hover .edu-image-frame img {
+  transform: scale(1.02);
+}
+
+/* ── Floating stat badge ── */
 .edu-programs-badge {
   position: absolute;
   bottom: 20px;
   left: 20px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   padding: 14px 20px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-soft);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.07),
+    0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .edu-programs-badge strong {
   display: block;
-  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
   font-weight: 800;
-  background: var(--theme-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-red);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .edu-programs-badge span {
+  display: block;
+  margin-top: 2px;
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #888;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Cards grid
+═══════════════════════════════════════════════════════════════ */
 .edu-programs-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
+  /* Align to same visual top as image */
+  align-content: start;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Program card
+═══════════════════════════════════════════════════════════════ */
 .edu-program-card {
-  padding: 22px 20px;
-  background: var(--white);
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  text-align: left;
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  position: relative;
+  padding: 24px 22px 24px 26px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
+  overflow: hidden;
+
+  /* Layered shadow — resting state */
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.04);
+
+  transition:
+    box-shadow 0.32s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s ease;
+
+  will-change: transform, box-shadow;
 }
 
 .edu-program-card:hover {
-  box-shadow: var(--shadow-lift);
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.015);
+  border-color: rgba(192, 57, 43, 0.18);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 10px 28px rgba(0, 0, 0, 0.10),
+    0 24px 56px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(192, 57, 43, 0.10);
 }
 
+.edu-program-card:focus-visible {
+  outline: 2px solid var(--primary-red);
+  outline-offset: 3px;
+}
+
+/* ── Signature: left track line ── */
+/* Thin vertical accent bar that grows from top on hover */
+.card-track-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0%;
+  background: var(--primary-red);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.edu-program-card:hover .card-track-line {
+  height: 100%;
+}
+
+/* ── Icon container ── */
 .edu-program-icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(192, 57, 43, 0.07);
   color: var(--primary-red);
+  margin-bottom: 14px;
+  transition: background 0.25s ease, transform 0.25s ease;
 }
 
+.edu-program-card:hover .edu-program-icon {
+  background: rgba(192, 57, 43, 0.12);
+  transform: scale(1.06);
+}
+
+/* ── Card text ── */
 .edu-program-card h3 {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
-  color: var(--text-dark);
-  margin: 0 0 6px;
+  color: #111;
+  margin: 0 0 8px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .edu-program-card p {
   font-size: 13px;
-  line-height: 1.6;
-  color: var(--text-muted);
+  line-height: 1.75;
+  color: #666;
   margin: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Responsive
+═══════════════════════════════════════════════════════════════ */
 @media (max-width: 991px) {
   .edu-programs-layout {
     grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .edu-image-frame img {
+    height: clamp(220px, 42vw, 320px);
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .edu-programs-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .edu-program-card {
+    padding: 20px 18px 20px 22px;
+    border-radius: 16px;
+  }
+
+  .edu-image-frame {
+    border-radius: 16px;
+  }
+
+  .edu-programs-badge {
+    bottom: 14px;
+    left: 14px;
+    padding: 11px 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Reduced motion
+═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .edu-program-card,
+  .edu-program-icon,
+  .edu-image-frame img,
+  .card-track-line {
+    transition: none !important;
+    transform: none !important;
   }
 }

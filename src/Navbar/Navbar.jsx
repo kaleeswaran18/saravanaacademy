@@ -3,6 +3,20 @@ import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
 
+const mobilePanelVariants = {
+  hidden: { x: "100%", opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.06, delayChildren: 0.08 },
+  },
+};
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, x: 16 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.28, ease: [0.4, 0, 0.2, 1] } },
+};
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -22,21 +36,19 @@ function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Handle ESC key to close menu
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape" && isOpen) {
         setIsOpen(false);
       }
     };
-    
+
     if (isOpen) {
       document.addEventListener("keydown", handleEsc);
       return () => document.removeEventListener("keydown", handleEsc);
     }
   }, [isOpen]);
 
-  // Handle outside click to close menu
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target) && isOpen) {
@@ -60,12 +72,34 @@ function Navbar() {
         <ul className="desktop-menu">
           <li>
             <NavLink to="/" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-              Home
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <motion.span
+                      className="nav-pill"
+                      layoutId="navPill"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="nav-label">Home</span>
+                </>
+              )}
             </NavLink>
           </li>
           <li>
             <NavLink to="/contact" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-              Contact
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <motion.span
+                      className="nav-pill"
+                      layoutId="navPill"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="nav-label">Contact</span>
+                </>
+              )}
             </NavLink>
           </li>
         </ul>
@@ -75,8 +109,10 @@ function Navbar() {
           className={`menu-btn ${isOpen ? "active" : ""}`}
           onClick={() => setIsOpen(!isOpen)}
           whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.04 }}
           aria-label="Toggle menu"
           aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <span /><span /><span />
         </motion.button>
@@ -85,18 +121,23 @@ function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
             className="mobile-menu"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            variants={mobilePanelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
           >
-            <NavLink to="/" className={({ isActive }) => (isActive ? "nav-active" : "")} onClick={() => setIsOpen(false)}>
-              Home
-            </NavLink>
-            <NavLink to="/contact" className={({ isActive }) => (isActive ? "nav-active" : "")} onClick={() => setIsOpen(false)}>
-              Contact
-            </NavLink>
+            <motion.div className="mobile-menu-item" variants={mobileItemVariants}>
+              <NavLink to="/" className={({ isActive }) => (isActive ? "nav-active" : "")} onClick={() => setIsOpen(false)}>
+                Home
+              </NavLink>
+            </motion.div>
+            <motion.div className="mobile-menu-item" variants={mobileItemVariants}>
+              <NavLink to="/contact" className={({ isActive }) => (isActive ? "nav-active" : "")} onClick={() => setIsOpen(false)}>
+                Contact
+              </NavLink>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

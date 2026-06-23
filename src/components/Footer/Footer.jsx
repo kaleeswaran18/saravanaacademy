@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "./Footer.css";
@@ -61,10 +61,20 @@ function Footer() {
 
           <div className="footer-column">
             <h4>Quick Links</h4>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-            </ul>
+            <nav aria-label="Quick links">
+              <ul className="footer-nav-list">
+                <li>
+                  <NavLink to="/" className={({ isActive }) => (isActive ? "footer-link-active" : "")}>
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/contact" className={({ isActive }) => (isActive ? "footer-link-active" : "")}>
+                    Contact
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           <div className="footer-column">

@@ -84,6 +84,8 @@ export default function AboutSection() {
       id="about"
       ref={ref}
     >
+      <div className="why-trust-glow" aria-hidden="true" />
+
       <div className="container">
 
         <SectionHeader
@@ -195,22 +197,26 @@ export default function AboutSection() {
 
           <div className="founder-btn">
 
-            <CTAButton
-              onClick={() =>
-                document
-                  .getElementById("impact-stats")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              See Our Impact
-            </CTAButton>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} style={{ display: "inline-block" }}>
+              <CTAButton
+                onClick={() =>
+                  document
+                    .getElementById("impact-stats")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                See Our Impact
+              </CTAButton>
+            </motion.div>
 
-            <CTAButton
-              variant="outline"
-              onClick={() => navigate("/contact")}
-            >
-              Get In Touch
-            </CTAButton>
+            <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} style={{ display: "inline-block" }}>
+              <CTAButton
+                variant="outline"
+                onClick={() => navigate("/contact")}
+              >
+                Get In Touch
+              </CTAButton>
+            </motion.div>
 
           </div>
 
