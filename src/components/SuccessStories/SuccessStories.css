@@ -67,7 +67,7 @@
 .stories-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 24px;
+  gap: 48px;
   align-items: start;
 }
 
@@ -117,6 +117,7 @@
   color: var(--text-muted);
 }
 
+/* ── Featured Card ── */
 .story-featured {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -126,17 +127,25 @@
   overflow: hidden;
   box-shadow: var(--shadow-lift);
   border: 1px solid rgba(212, 175, 55, 0.18);
+  height: clamp(420px, 55vw, 520px); /* ✅ Desktop: responsive tall height */
 }
 
 .story-featured-image {
   position: relative;
-  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: #e8e8e8;
 }
 
 .story-featured-image img {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   object-fit: cover;
+  object-position: 50% 15%;
+  display: block;
 }
 
 .story-highlight-badge {
@@ -149,22 +158,25 @@
   border-radius: 50px;
   font-size: 11px;
   font-weight: 700;
+  z-index: 1;
 }
 
 .story-featured-content {
-  padding: clamp(28px, 4vw, 36px);
+  padding: clamp(28px, 4vw, 40px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  height: 100%;
+  overflow: hidden;
 }
 
 .story-quote {
-  font-size: clamp(15px, 1.6vw, 17px);
-  line-height: 1.7;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.75;
   color: var(--text-dark);
   font-style: italic;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
 }
 
 .story-featured-content h4 {
@@ -179,7 +191,14 @@
   font-size: 13px;
 }
 
-/* ── Tablet ── */
+/* ── Laptop (1024px – 1280px) ── */
+@media (max-width: 1280px) {
+  .story-featured {
+    height: clamp(400px, 50vw, 480px); /* ✅ Laptop: slightly less */
+  }
+}
+
+/* ── Tablet (768px – 991px) ── */
 @media (max-width: 991px) {
   .stories-hero {
     grid-template-columns: 1fr;
@@ -220,16 +239,31 @@
     flex-shrink: 0;
   }
 
+  /* ✅ Tablet: stacked, auto height */
   .story-featured {
     grid-template-columns: 1fr;
+    height: auto;
   }
 
+  /* ✅ Tablet: tall image */
   .story-featured-image {
-    min-height: 220px;
+    height: 360px;
+  }
+
+  .story-featured-image img {
+    flex: none;
+    height: 100%;
   }
 }
 
-/* ── Mobile ── */
+/* ── Large Mobile (577px – 767px) ── */
+@media (max-width: 767px) {
+  .story-featured-image {
+    height: 320px; /* ✅ Large mobile */
+  }
+}
+
+/* ── Small Mobile (≤576px) ── */
 @media (max-width: 576px) {
   .stories-hero {
     margin-bottom: 32px;
@@ -245,5 +279,10 @@
 
   .story-featured-content {
     padding: 24px 20px;
+  }
+
+  /* ✅ Mobile: comfortable tall image */
+  .story-featured-image {
+    height: 280px;
   }
 }
