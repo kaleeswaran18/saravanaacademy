@@ -164,7 +164,7 @@
 
 .video-hero-badge-logo-img {
   width: clamp(160px, 20vw, 240px);
-  height: auto;
+   height:clamp(8rem,9vw,6.5rem);
   display: block;
   filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.28));
 }

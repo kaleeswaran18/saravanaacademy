@@ -16,7 +16,7 @@
 .stories-hero-logo {
   width: 100%;
   max-width: 320px;
-  height: auto;
+   height:clamp(13rem,9vw,6.5rem);
   object-fit: contain;
   display: block;
 }

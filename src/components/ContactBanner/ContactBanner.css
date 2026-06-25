@@ -51,7 +51,7 @@
 
 /* ── Column 1: logo image ── */
 .vscare-logo-inline{
-    height:clamp(4.2rem,8vw,7rem);
+    height:clamp(13rem,8vw,7rem);
     width:auto;
     object-fit:contain;
     filter:drop-shadow(0 6px 16px rgba(214,40,40,0.10));
@@ -165,7 +165,7 @@
 }
 
 .vscare-logo-inline{
-    height:clamp(6rem,9vw,6.5rem);
+    height:clamp(13rem,9vw,6.5rem);
 }
 
 .heading-lines{
@@ -224,7 +224,7 @@
 }
 
 .vscare-logo-inline{
-    height:clamp(6rem,12vw,4rem);
+    height:clamp(13rem,12vw,4rem);
 }
 
 .contact-left p{

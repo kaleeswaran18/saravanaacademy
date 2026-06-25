@@ -312,13 +312,14 @@ function HeroSlider({ slides = bannerSlides }) {
             initial="hidden"
             animate="visible"
           >
+
             <picture>
               <source
                 media="(max-width: 991px)"
-                srcSet="https://res.cloudinary.com/dbrymrvqu/image/upload/v1781953562/ChatGPT_Image_Jun_20__2026__04_31_15_PM-removebg-preview_xy236r.png"
+                srcSet="https://res.cloudinary.com/dbrymrvqu/image/upload/v1782386142/ChatGPT_Image_Jun_25__2026__04_43_44_PM-removebg-preview_bjwltd.png"
               />
               <img
-                src={'https://res.cloudinary.com/dbrymrvqu/image/upload/v1781952277/ChatGPT_Image_Jun_20__2026__04_13_57_PM-removebg-preview_d6mi06.png'}
+                src={'https://res.cloudinary.com/dbrymrvqu/image/upload/v1782390929/ChatGPT_Image_Jun_25__2026__06_04_51_PM-removebg-preview_jnhgdx.png'}
                 alt="V's Care — Shaping Young Minds"
                 className="video-hero-badge-logo-img"
               />

@@ -22,7 +22,7 @@ function ContactBanner() {
 
           <h1 className="contact-heading">
             <img
-              src="https://res.cloudinary.com/dbrymrvqu/image/upload/v1782194894/vscare-logo-cropped_1_a1dpe6.png"
+              src="https://res.cloudinary.com/dbrymrvqu/image/upload/v1782386142/ChatGPT_Image_Jun_25__2026__04_43_44_PM-removebg-preview_bjwltd.png"
               alt="V's Care"
               className="vscare-logo-inline"
             />

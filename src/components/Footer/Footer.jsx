@@ -20,7 +20,7 @@ function Footer() {
           transition={{ duration: 0.6 }}
         >
           <div className="footer-column footer-brand">
-            <h3>Dr.saravanaacademy</h3>
+            <h3>MaduraiDr.saravanaacademy</h3>
             <p>
               Empowering communities through
               education, healthcare and social
@@ -100,7 +100,7 @@ function Footer() {
               </li>
               <li>
                 <i className="footer-icon footer-icon-mail" aria-hidden="true" />
-                <a href="mailto:Drsaravanaacademy@gmail.com">Drsaravanaacademy@gmail.com</a>
+                <a href="mailto:info@maduraidrsaravanaacademy.in">info@maduraidrsaravanaacademy.in</a>
               </li>
             </ul>
           </div>
@@ -108,7 +108,7 @@ function Footer() {
 
         <div className="footer-bottom">
           <span className="footer-bottom-copy">
-            © 2026 <span>Dr.saravanaacademy</span>. All Rights Reserved.
+            © 2026 <span>MaduraiDr.saravanaacademy</span>. All Rights Reserved.
           </span>
           <span className="footer-bottom-credit">
             Designed with care for the community

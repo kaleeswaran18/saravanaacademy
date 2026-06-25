@@ -14,6 +14,13 @@ const stories = [
     image: "https://res.cloudinary.com/dbrymrvqu/image/upload/v1781362339/doctorcheck_mcfkap.png",
   },
   {
+  name: "Malala Yousafzai",
+  role: "Education Activist & Nobel Peace Prize Laureate",
+  quote: "One child, one teacher, one book, and one pen can change the world.",
+  highlight: "Education Empowers",
+  image: "https://res.cloudinary.com/dbrymrvqu/image/upload/v1782392808/Malala_Yousafzai_Is_Married_Activist_Shares_First_Photos_from_Ceremony__Partners_for_Life_kemfyi.jpg"
+},
+  {
     name: "Dr. A.P.J. Abdul Kalam",
     role: "Former President of India",
     quote:
@@ -21,6 +28,13 @@ const stories = [
     highlight: "Dream • Learn • Achieve",
     image: "https://res.cloudinary.com/dbrymrvqu/image/upload/v1781362363/AbdulKalam_y7vvvr.jpg",
   },
+  {
+  name: "Sudha Murty",
+  role: "Author, Philanthropist & Educator",
+  quote: "Education is the foundation upon which we build our future.",
+  highlight: "Shaping Young Minds",
+  image: "https://res.cloudinary.com/dbrymrvqu/image/upload/v1782392825/download_30_p13owb.jpg"
+},
   {
     name: "Dr. B.R. Ambedkar",
     role: "Father of the Indian Constitution",
@@ -75,7 +89,8 @@ function SuccessStories() {
             transition={{ duration: 0.6 }}
           >
             <img
-              src="https://res.cloudinary.com/dbrymrvqu/image/upload/v1782194894/vscare-logo-cropped_1_a1dpe6.png"
+                srcSet="https://res.cloudinary.com/dbrymrvqu/image/upload/v1782386142/ChatGPT_Image_Jun_25__2026__04_43_44_PM-removebg-preview_bjwltd.png"
+              src=""
               alt="V's Care Youngsters"
               className="stories-hero-logo"
             />
