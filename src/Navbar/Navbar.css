@@ -30,9 +30,11 @@ body {
   --nav-bg:     rgba(255, 248, 225, 0.96);
   --nav-border: rgba(212, 175, 55, 0.22);
 
-  /* Logo photo sizes — fluid via clamp */
+  /* Logo photo sizes — fluid via clamp.
+     Compact == default so the logo never changes
+     size on scroll, on any device. */
   --logo-photo-size: clamp(40px, 5.5vw, 58px);
-  --logo-photo-size-compact: clamp(36px, 4.8vw, 52px);
+  --logo-photo-size-compact: clamp(40px, 5.5vw, 58px);
 }
 
 /* ══════════════════════════════════════
@@ -255,13 +257,9 @@ body {
   transition: font-size var(--nav-transition);
 }
 
-.custom-navbar.scrolled .logo-text {
-  font-size: clamp(0.74rem, 1.05vw, 1.1rem);
-}
-
-.custom-navbar.scrolled .logo-sub {
-  font-size: clamp(7.5px, 0.68vw, 9.5px);
-}
+/* Logo text/sub font-size is intentionally NOT overridden in
+   .scrolled — keeps the whole logo (photo + text) the same
+   size whether the navbar is at-rest or scrolled. */
 
 /* ══════════════════════════════════════
    DESKTOP MENU
@@ -520,13 +518,16 @@ body {
    • Show hamburger, hide desktop menu
    • Disable at-top transparent effect
      (logo must always be readable)
+   • Logo photo made bigger here, and
+     compact == default so it never
+     shrinks on scroll
 ══════════════════════════════════════ */
 @media (max-width: 991px) {
   :root {
     --nav-height:         72px;
     --nav-height-compact: 64px;
-    --logo-photo-size:         clamp(38px, 7vw, 50px);
-    --logo-photo-size-compact: clamp(34px, 6.5vw, 46px);
+    --logo-photo-size:         clamp(46px, 9vw, 62px);
+    --logo-photo-size-compact: clamp(46px, 9vw, 62px);
   }
 
   .desktop-menu { display: none; }
@@ -586,8 +587,8 @@ body {
   :root {
     --nav-height:         66px;
     --nav-height-compact: 58px;
-    --logo-photo-size:         44px;
-    --logo-photo-size-compact: 40px;
+    --logo-photo-size:         54px;
+    --logo-photo-size-compact: 54px;
   }
 
   .logo {
@@ -604,23 +605,20 @@ body {
   .logo-text {
     font-size: 0.82rem;
   }
-
-  .custom-navbar.scrolled .logo-text {
-    font-size: 0.76rem;
-  }
 }
 
 /* ══════════════════════════════════════
    BREAKPOINT: SMALL MOBILE  (≤ 400px)
-   Compact logo — sub label hidden
-   so brand name never gets cut off
+   Logo stays bigger and "Madurai" stays
+   visible — text just tightens up a bit
+   so the academy name doesn't get cut off
 ══════════════════════════════════════ */
 @media (max-width: 400px) {
   :root {
     --nav-height:         62px;
     --nav-height-compact: 54px;
-    --logo-photo-size:         40px;
-    --logo-photo-size-compact: 36px;
+    --logo-photo-size:         48px;
+    --logo-photo-size-compact: 48px;
   }
 
   .logo {
@@ -629,18 +627,15 @@ body {
     padding-inline: 3px 6px;
   }
 
-  /* Hide "Madurai" sub-label on very small screens
-     to give full width to the academy name */
+  /* Keep "Madurai" sub-label visible — just shrink it
+     so the academy name still has room */
   .logo-sub {
-    display: none;
+    font-size: 7px;
+    letter-spacing: 0.08em;
   }
 
   .logo-text {
-    font-size: 0.78rem;
-  }
-
-  .custom-navbar.scrolled .logo-text {
-    font-size: 0.73rem;
+    font-size: 0.74rem;
   }
 }
 
@@ -652,16 +647,21 @@ body {
   :root {
     --nav-height:         58px;
     --nav-height-compact: 52px;
-    --logo-photo-size:         36px;
-    --logo-photo-size-compact: 32px;
+    --logo-photo-size:         42px;
+    --logo-photo-size-compact: 42px;
   }
 
   .logo {
     gap: 6px;
   }
 
+  .logo-sub {
+    font-size: 6.5px;
+    letter-spacing: 0.05em;
+  }
+
   .logo-text {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     letter-spacing: 0;
   }
 }
