@@ -33,8 +33,8 @@ body {
   /* Logo photo sizes — fluid via clamp.
      Compact == default so the logo never changes
      size on scroll, on any device. */
-  --logo-photo-size: clamp(40px, 5.5vw, 58px);
-  --logo-photo-size-compact: clamp(40px, 5.5vw, 58px);
+  --logo-photo-size: clamp(45px, 6.2vw, 66px);
+  --logo-photo-size-compact: clamp(45px, 6.2vw, 66px);
 }
 
 /* ══════════════════════════════════════
@@ -172,12 +172,16 @@ body {
   gap: clamp(6px, 0.9vw, 11px);
 }
 
-/* ── Photo wrapper — keeps circle crop stable ── */
+/* ── Photo wrapper — keeps circle crop stable ──
+   UPDATED: gradient ring + white inner ring so the logo
+   clearly separates from the cream navbar background
+   instead of blending into it. */
 .logo-photo-wrap {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   width:  var(--logo-photo-size);
   height: var(--logo-photo-size);
@@ -185,18 +189,28 @@ body {
 
   border-radius: 50%;
 
-  /* Ring effects on the wrapper instead of the img */
-  border: 2px solid rgba(255, 255, 255, 0.95);
-  outline: 1.5px solid rgba(212, 175, 55, 0.35);
-  box-shadow:
-    0 0 0 3px rgba(214, 40, 40, 0.08),
-    0 4px 14px rgba(214, 40, 40, 0.2);
+  /* Gradient ring border via padding + background trick */
+  padding: 2.5px;
+  background: var(--theme-gradient);
 
-  overflow: hidden;
+  /* box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 5px rgba(214, 40, 40, 0.18),
+    0 4px 16px rgba(214, 40, 40, 0.28); */
+
+  overflow: visible;
   transition:
     width var(--nav-transition),
     height var(--nav-transition),
-    min-width var(--nav-transition);
+    min-width var(--nav-transition),
+    box-shadow 0.3s ease;
+}
+
+.logo-photo-wrap:hover {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.95),
+    0 0 0 6px rgba(214, 40, 40, 0.28),
+    0 6px 20px rgba(214, 40, 40, 0.36);
 }
 
 .custom-navbar.scrolled .logo-photo-wrap {
@@ -211,7 +225,10 @@ body {
   object-fit: cover;
   object-position: center top;
   display: block;
-  /* No border/shadow on img itself — wrapper handles it */
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Text block ── */
@@ -225,14 +242,14 @@ body {
 }
 
 .logo-sub {
-  font-size: clamp(8px, 0.75vw, 10.5px);
+  font-size: clamp(14px, 0.75vw, 10.5px);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: var(--theme-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Solid color instead of gradient background-clip — the gradient-clip
+     text effect renders unreliably (sometimes invisible) on several
+     mobile browsers, which is why "Madurai" was hard to see on phones. */
+  color: var(--primary-red);
   display: block;
   line-height: 1;
   opacity: 0.82;
@@ -244,14 +261,15 @@ body {
    bigger, bolder and fully opaque instead of the subtle desktop treatment */
 @media (max-width: 991px) {
   .logo-sub {
+      font-size: clamp(14px, 0.75vw, 10.5px);
     font-weight: 700;
     opacity: 1;
   }
 }
 
 .logo-text {
-  font-size: clamp(0.78rem, 1.25vw, 1.22rem);
-  font-weight: 700;
+  font-size: clamp(0.88rem, 1.4vw, 1.35rem);
+  font-weight: 800;
   background: var(--theme-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -535,8 +553,8 @@ body {
   :root {
     --nav-height:         72px;
     --nav-height-compact: 64px;
-    --logo-photo-size:         clamp(46px, 9vw, 62px);
-    --logo-photo-size-compact: clamp(46px, 9vw, 62px);
+    --logo-photo-size:         clamp(52px, 10vw, 70px);
+    --logo-photo-size-compact: clamp(52px, 10vw, 70px);
   }
 
   .desktop-menu { display: none; }
@@ -596,8 +614,8 @@ body {
   :root {
     --nav-height:         66px;
     --nav-height-compact: 58px;
-    --logo-photo-size:         54px;
-    --logo-photo-size-compact: 54px;
+    --logo-photo-size:         60px;
+    --logo-photo-size-compact: 60px;
   }
 
   .logo {
@@ -607,12 +625,12 @@ body {
   }
 
   .logo-sub {
-    font-size: 10.5px;
+      font-size: clamp(14px, 0.75vw, 10.5px);
     letter-spacing: 0.1em;
   }
 
   .logo-text {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
   }
 }
 
@@ -626,8 +644,8 @@ body {
   :root {
     --nav-height:         62px;
     --nav-height-compact: 54px;
-    --logo-photo-size:         48px;
-    --logo-photo-size-compact: 48px;
+    --logo-photo-size:         54px;
+    --logo-photo-size-compact: 54px;
   }
 
   .logo {
@@ -639,12 +657,12 @@ body {
   /* Keep "Madurai" sub-label clearly visible and readable —
      bold, full opacity, sized to still fit next to the academy name */
   .logo-sub {
-    font-size: 9px;
+      font-size: clamp(14px, 0.75vw, 10.5px);
     letter-spacing: 0.07em;
   }
 
   .logo-text {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -656,8 +674,8 @@ body {
   :root {
     --nav-height:         58px;
     --nav-height-compact: 52px;
-    --logo-photo-size:         42px;
-    --logo-photo-size-compact: 42px;
+    --logo-photo-size:         47px;
+    --logo-photo-size-compact: 47px;
   }
 
   .logo {
@@ -665,12 +683,12 @@ body {
   }
 
   .logo-sub {
-    font-size: 8px;
+      font-size: clamp(14px, 0.75vw, 10.5px);
     letter-spacing: 0.04em;
   }
 
   .logo-text {
-    font-size: 0.66rem;
+    font-size: 0.74rem;
     letter-spacing: 0;
   }
 }
