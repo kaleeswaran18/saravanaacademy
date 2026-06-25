@@ -112,7 +112,7 @@ function Navbar() {
           </span>
           <span className="logo-text-wrap">
             <span className="logo-sub" aria-hidden="true">Madurai</span>
-            <span className="logo-text">Dr.Saravana Academy</span>
+            <span className="logo-text">Dr.Saravana'sacademy</span>
           </span>
         </NavLink>
 
