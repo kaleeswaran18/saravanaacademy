@@ -58,7 +58,7 @@ html {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding-left: clamp(16px, 4vw, 24px);
+  /* padding-left: clamp(16px, 4vw, 24px); */
   padding-right: clamp(16px, 4vw, 24px);
 }
 
